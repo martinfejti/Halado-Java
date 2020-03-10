@@ -26,9 +26,13 @@ public class Diak extends Szemely implements Comparable<Diak> {
 
     @Override
     public String toString() {
-        return "numberOfPuska=" + numberOfPuska + ", age=" + super.getAge() + " name= " + super.getName();
+        return "Diak [numberOfPuska=" + numberOfPuska + ", getAge()=" + getAge() + ", getName()=" + getName() + "]";
     }
-    
-    
 
+//    @Override
+//    public String toString() {
+//        return "numberOfPuska=" + numberOfPuska + ", age=" + super.getAge() + " name= " + super.getName();
+//    }
+
+    
 }
