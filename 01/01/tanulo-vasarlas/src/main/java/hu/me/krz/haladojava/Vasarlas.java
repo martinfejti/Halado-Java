@@ -31,6 +31,6 @@ public class Vasarlas
             System.out.println("Atlag: " + avg);
         }
         
-        System.out.println("Ennyi tanuló maradt: " + students.size());
+        System.out.println("Ennyi tanuló maradt: " + students.get(0).getAllStudents());
     }
 }
