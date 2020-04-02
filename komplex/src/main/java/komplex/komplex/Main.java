@@ -9,20 +9,20 @@ public class Main {
 
         UserRepository userRepository = new UserRepository();
         List<Validator> validators = new ArrayList<Validator>();
-        System.out.println("Repo created");
-        
-        validators.add(new SpaceValidator());
         validators.add(new LengthValidator());
-        System.out.println("Input conditions are set");
-        
-        userRepository.save(new User("Attila", true, "abc123"));
-        userRepository.save(new User("Béla", true, "abc456"));
-        userRepository.save(new User("Csaba", false, "abc789"));
-        
-        for (User user : userRepository.findAll()) {
-            System.out.println("User added: " + user.getName());
-        }
-        System.out.println("Done");
+        validators.add(new SpaceValidator());
+        UserService userService = new UserServiceImpl(
+                userRepository, validators
+        );
+
+        UserController userController = new UserController(
+                userService, new NeptunCodeGenerator()
+        );
+
+
+        userController.save(new UserDto(" vanBenneSpace"));
+        userController.save(new UserDto("rovid"));
+        userController.save(new UserDto("nagyonjo"));
     }
 
 }

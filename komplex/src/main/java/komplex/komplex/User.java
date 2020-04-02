@@ -4,30 +4,23 @@ public class User {
 
     private String name;
     private boolean enabled;
-    private String neptunKod;
-    
-    public User(String name, boolean enabled, String neptunKod) {
+    private String neptunkod;
+
+    public User(String name, boolean enabled, String neptunkod) {
         this.name = name;
         this.enabled = enabled;
-        this.neptunKod = neptunKod;
+        this.neptunkod = neptunkod;
     }
-    
-    public User(String name) {
-        this.name = name;
-    }
-    
-    public User() {
-    }
-    
+
     public String getName() {
         return name;
     }
-    
+
     public boolean isEnabled() {
         return enabled;
     }
-    
-    public String getNeptunKod() {
-        return neptunKod;
+
+    public String getNeptunkod() {
+        return neptunkod;
     }
 }

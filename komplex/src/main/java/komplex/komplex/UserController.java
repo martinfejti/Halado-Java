@@ -2,7 +2,16 @@ package komplex.komplex;
 
 public class UserController {
 
-    public void save(User user) {
-        
+    UserService userService;
+    NeptunCodeGenerator neptunCodeGenerator;
+
+    public UserController(UserService userService, NeptunCodeGenerator neptunCodeGenerator) {
+        this.userService = userService;
+        this.neptunCodeGenerator = neptunCodeGenerator;
+    }
+
+    public void save(UserDto userDto) {
+        userService.save(new User(userDto.getName(), true,
+                String.format("neptun %d", neptunCodeGenerator.getNextCounter())));
     }
 }

@@ -3,31 +3,31 @@ package komplex.komplex;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserRepository {
+public class UserRepository implements UserModify{
 
-    List<User> users = new ArrayList<User>();
-    
+    private List<User> users = new ArrayList<User>();
     public void save(User user) {
-        if (!user.getName().contains(" ")) {
-            users.add(user);            
-            System.out.println("User has been created with name: " + user.getName());
-        }
+        System.out.printf("%s mentve%n", user.getName());
+        users.add(user);
     }
-    
-    public void writeError() {
-        System.out.println("The username is either shorter than 6 character or contains a whitespace!");
-    }
-    
-    public User getByNeptunKod(String neptunKod) {
+    public User getByNektunKod(String neptunkod) {
         for (User user : users) {
-            if (user.getNeptunKod().equals(neptunKod)) {
+            if (user.getNeptunkod().equals(neptunkod)) {
                 return user;
             }
-        } 
+        }
         return null;
     }
-    
     public List<User> findAll() {
         return users;
+    }
+    public List<User> findByEnabledIsTrue() {
+        List<User> result = new ArrayList<User>();
+        for (User user : users) {
+            if (user.isEnabled()) {
+                result.add(user);
+            }
+        }
+        return result;
     }
 }
