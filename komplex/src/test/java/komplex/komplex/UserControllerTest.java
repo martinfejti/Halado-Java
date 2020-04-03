@@ -1,38 +1,24 @@
 package komplex.komplex;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
-/**
- * Unit test for simple App.
- */
-public class UserControllerTest 
-    extends TestCase
-{
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public UserControllerTest( String testName )
-    {
-        super( testName );
-    }
+import org.junit.Test;
 
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( UserControllerTest.class );
-    }
+public class UserControllerTest {
 
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
+    @Test
+    public void save() {
+        UserService userService = mock(UserService.class);
+        NeptunCodeGenerator neptunCodeGenerator = mock(NeptunCodeGenerator.class);
+        UserController userController = new UserController(userService, neptunCodeGenerator);
+        UserDto userDto = mock(UserDto.class);
+        User user = mock(User.class);
+        
+        userService.save(user);
+        userController.save(userDto);
+        
+        verify(userService, times(1)).save(user);
     }
 }
