@@ -8,5 +8,6 @@
   <modules>
   	<module>calculator-logic</module>
   	<module>calculator-console</module>
+  	<module>calculator-web</module>
   </modules>
 </project>
