@@ -7,5 +7,6 @@
   
   <modules>
   	<module>calculator-logic</module>
+  	<module>calculator-console</module>
   </modules>
 </project>
