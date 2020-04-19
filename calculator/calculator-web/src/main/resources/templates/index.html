@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Calculator</title>
+</head>
+<body>
+	Calculator
+	<form action="/" method="post">
+		<input type="text" name="operator" placeholder="operator">
+		<input type="number" name="firstOperand" placeholder="first operand">
+		<input type="number" name="secondOperand" placeholder="second operand">
+		
+		<button type="submit" name="submitButton">Calculate</button>
+	</form>
+	<p>Result: </p>
+	<h1 th:text="${result}"></h1>
+</body>
+</html>
