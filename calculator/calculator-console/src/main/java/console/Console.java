@@ -12,7 +12,7 @@ public class Console {
         Scanner sc = new Scanner(System.in);
         
         System.out.println("Which operator do you want to use? (+,-,*,/)");
-        String operator = sc.next(); //asszem a next csak egy karakter
+        String operator = sc.next();
         
         System.out.println("Give the first operand!");
         double fistOperand = sc.nextDouble();

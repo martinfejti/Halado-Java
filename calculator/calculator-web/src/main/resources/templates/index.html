@@ -7,7 +7,12 @@
 <body>
 	Calculator
 	<form action="/" method="post">
-		<input type="text" name="operator" placeholder="operator">
+		<select name="operator">
+			<option value="+">+</option>
+			<option value="-">-</option>
+			<option value="*">*</option>
+			<option value="/">/</option>
+		</select>
 		<input type="number" name="firstOperand" placeholder="first operand">
 		<input type="number" name="secondOperand" placeholder="second operand">
 		

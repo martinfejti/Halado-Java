@@ -17,6 +17,8 @@ public class Calculator {
             result = a * b;
         } else if (operator.equals("/")) {
             result = a / b;
+        } else {
+            System.out.println("Unrecognizable operator! Method return with 0");
         }
         
         System.out.println("Result: " + result);

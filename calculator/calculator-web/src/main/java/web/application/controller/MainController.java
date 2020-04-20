@@ -34,8 +34,6 @@ public class MainController {
             ) {
         ModelAndView mav = new ModelAndView();
         
-        // String result = String.valueOf(calculator.calculate(operator, firstOperand, secondOperand));
-        // System.out.println(result);
         mav.setViewName("index.html");
         mav.addObject("result", String.valueOf(calculator.calculate(operator, firstOperand, secondOperand)));
         
