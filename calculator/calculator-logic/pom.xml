@@ -7,4 +7,13 @@
   </parent>
   <groupId>hu.calculator.logic</groupId>
   <artifactId>calculator-logic</artifactId>
+  
+  <dependencies>
+  	<dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.12</version>
+        <scope>test</scope>
+    </dependency>
+  </dependencies>
 </project>
