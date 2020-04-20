@@ -26,15 +26,29 @@ public class CalculatorTest {
     
     @Test
     public void caseMultiplication() {
-        String operand = "*";
+        String operator = "*";
         
-        assertEquals(firstOperand * secondOperand, calculator.calculate(operand, firstOperand, secondOperand), 0);
+        assertEquals(firstOperand * secondOperand, calculator.calculate(operator, firstOperand, secondOperand), 0);
     }
     
     @Test
     public void caseDivision() {
-        String operand = "/";
+        String operator = "/";
         
-        assertEquals(firstOperand / secondOperand, calculator.calculate(operand, firstOperand, secondOperand), 0);
+        assertEquals(firstOperand / secondOperand, calculator.calculate(operator, firstOperand, secondOperand), 0);
+    }
+    
+    @Test
+    public void caseDivisionByZero() {
+        String operator = "/";
+        
+        assertEquals(0, calculator.calculate(operator, firstOperand, 0), 0);
+    }
+    
+    @Test
+    public void caseWrongOperator() {
+        String operator = "%";
+        
+        assertEquals(0, calculator.calculate(operator, firstOperand, secondOperand), 0);
     }
 }

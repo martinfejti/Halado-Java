@@ -15,10 +15,10 @@ public class Calculator {
             result = a - b;
         } else if (operator.equals("*")) {
             result = a * b;
-        } else if (operator.equals("/")) {
+        } else if (operator.equals("/") && b != 0) {
             result = a / b;
         } else {
-            System.out.println("Unrecognizable operator! Method return with 0");
+            System.out.println("Unrecognizable operator or division with zero! Method return with 0");
         }
         
         System.out.println("Result: " + result);
