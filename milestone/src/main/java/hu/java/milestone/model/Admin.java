@@ -1,5 +1,8 @@
 package hu.java.milestone.model;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Admin {
 
     private String username;

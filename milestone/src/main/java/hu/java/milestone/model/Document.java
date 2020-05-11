@@ -2,6 +2,9 @@ package hu.java.milestone.model;
 
 import java.io.File;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Document {
 
     private File file;
