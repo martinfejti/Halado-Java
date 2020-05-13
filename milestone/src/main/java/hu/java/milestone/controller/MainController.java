@@ -12,7 +12,9 @@ public class MainController {
     public ModelAndView getMainPage() {
         ModelAndView mav = new ModelAndView();
         
+        
         mav.setViewName("main.html");
+        mav.addObject("kenyer", "kenyer");
         
         return mav;
     }

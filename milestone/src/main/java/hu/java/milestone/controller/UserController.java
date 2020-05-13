@@ -3,6 +3,7 @@ package hu.java.milestone.controller;
 import java.io.File;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -51,13 +52,33 @@ public class UserController {
         @RequestMapping(value="/showUser", method=RequestMethod.GET)
         public ModelAndView showUser() {
             ModelAndView mav = new ModelAndView();
-            System.out.println("SHOW USER");
+            
             mav.setViewName("admin.html");
-            mav.addObject("username", String.valueOf(user.getUsername()));
+            System.out.println("SHOW USer");
             System.out.println(user.getUsername());
+            mav.addObject("username", user.getUsername());
             mav.addObject("email", user.getEmail());
             mav.addObject("password", user.getPassword());
-            mav.addObject("file", user.getDocument());
+            mav.addObject("file", String.valueOf(user.getDocument()));
+            mav.addObject("henlo", "henlo");
+            
+            return mav;
+        }
+        
+        @GetMapping(value="/admin.html")
+        public ModelAndView showAdminPage() {
+            ModelAndView mav = new ModelAndView();
+            
+            mav.setViewName("admin");
+            
+            return mav;
+        }
+        
+        @GetMapping(value="/user.html")
+        public ModelAndView showUserPage() {
+            ModelAndView mav = new ModelAndView();
+            
+            mav.setViewName("user");
             
             return mav;
         }
