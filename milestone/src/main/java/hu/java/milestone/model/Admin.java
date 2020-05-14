@@ -8,13 +8,11 @@ public class Admin {
     private String username;
     private String password;
     private String email;
-    private boolean isAdmin;
     
     public Admin(String username, String password, String email) {
         this.username = username;
         this.password = password;
         this.email = email;
-        this.isAdmin = true;
     }
     
     public Admin() {
@@ -43,13 +41,4 @@ public class Admin {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    public boolean isAdmin() {
-        return isAdmin;
-    }
-
-    public void setAdmin(boolean isAdmin) {
-        this.isAdmin = isAdmin;
-    }
-    
 }

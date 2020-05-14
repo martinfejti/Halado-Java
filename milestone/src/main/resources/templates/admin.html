@@ -15,5 +15,15 @@
 	<h6 th:text="${email}"></h6>
 	<h6 th:text="*{henlo}"></h6>
 	<h6 th:text="${file}"></h6>
+	
+	<div>
+		<form action="/approveDocument" method="get">
+			<label>Elfogadja a hallgató által feltöltött dokumentumot?</label>
+			<br>
+			<button type="submit">Igen</button>
+			<br>
+			<button type="button">Nem</button>		
+		</form>
+	</div>
 </body>
 </html>

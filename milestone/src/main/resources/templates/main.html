@@ -5,38 +5,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>Regisztráljon egy hallgatót és egy tanárt</h1>
-	<div>
-		<label>Hallgató</label>
-		<form action="/registerUser" method="get">
-			<label>Username</label>
-			<input type="text" name="userUsername">
-			<label>Email</label>
-			<input type="text" name="userEmail">
-			<label>Password</label>
-			<input type="password" name="userPassword">
-			<button type="submit">Regisztráció</button>
-		</form>
-	</div>
-	<br><br>
-	<div>
-		<label>Tanár</label>
-		<form action="/registerAdmin" method="get">
-			<label>Username</label>
-			<input type="text" name="adminUsername">
-			<label>Email</label>
-			<input type="text" name="adminEmail">
-			<label>Password</label>
-			<input type="password" name="adminPassword">
-			<button type="submit">Regisztráció</button>
-		</form>
-	</div>
+<h1>Mérföldkőteljesítő alkalmazás</h1>
 	<div>
 		<p><a href="user.html">Hallgató oldala</a>
 	</div>
 	<div>
 		<p><a href="admin.html">Tanár oldala</a>
 	</div>
-	<label th:text="${kenyer}"></label>
 </body>
 </html>
