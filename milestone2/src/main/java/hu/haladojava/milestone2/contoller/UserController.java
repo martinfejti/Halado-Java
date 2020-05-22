@@ -35,4 +35,9 @@ public class UserController {
     public String uploadDocument(int userId) {
         return this.userService.uploadDocument(userId);
     }
+    
+    @PutMapping("/approveDocument")
+    public int approveDocument(int userId) {
+        return this.userService.approveDocument(userId);
+    }
 }

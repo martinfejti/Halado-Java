@@ -44,4 +44,8 @@ public class UserService {
         
         return file.getName();
     }
+    
+    public int approveDocument(int userId) {
+        return this.userRepository.approveDocument(userId);
+    }
 }

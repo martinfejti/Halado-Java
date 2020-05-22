@@ -46,4 +46,12 @@ public class UserRepository {
         query.setParameter("file", file);
         query.executeUpdate();
     }
+    
+    public int approveDocument(int userId) {
+        Query query = this.entityManager.createQuery("UPDATE User u SET u.documentIsApprovedByAdmin = TRUE WHERE u.id = :userId");
+        query.setParameter("userId", userId);
+        query.executeUpdate();
+        
+        return userId;
+    }
 }
