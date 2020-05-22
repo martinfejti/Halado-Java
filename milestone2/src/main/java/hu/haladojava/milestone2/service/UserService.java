@@ -1,5 +1,7 @@
 package hu.haladojava.milestone2.service;
 
+import java.io.File;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,5 +35,13 @@ public class UserService {
         UserEntity userEntity = this.userRepository.getUserByUsernameAndPassword(username, password);
         
         return this.userMapper.mapUserEntityToDto(userEntity);
+    }
+    
+    public String uploadDocument(int userId) {
+        File file = new File("test.txt");
+        
+        this.userRepository.uploadDocument(userId, file);
+        
+        return file.getName();
     }
 }

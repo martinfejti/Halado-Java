@@ -1,7 +1,10 @@
 package hu.haladojava.milestone2.repository;
 
+import java.io.File;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
@@ -35,5 +38,12 @@ public class UserRepository {
         result = query.getSingleResult();
         
         return result;
+    }
+    
+    public void uploadDocument(int userId, File file) {
+        Query query = this.entityManager.createQuery("UPDATE User u SET u.document = :file, u.documentIsApprovedByUser = TRUE WHERE u.id = :userId");
+        query.setParameter("userId", userId);
+        query.setParameter("file", file);
+        query.executeUpdate();
     }
 }

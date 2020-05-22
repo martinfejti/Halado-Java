@@ -3,6 +3,7 @@ package hu.haladojava.milestone2.contoller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,5 +29,10 @@ public class UserController {
     @PostMapping("/register")
     public UserDto createUser(@RequestBody CreateUserDto createUserDto) {
         return this.userService.createUserEntity(createUserDto);
+    }
+    
+    @PutMapping("/uploadDocument")
+    public String uploadDocument(int userId) {
+        return this.userService.uploadDocument(userId);
     }
 }
