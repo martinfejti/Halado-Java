@@ -54,4 +54,14 @@ public class UserRepository {
         
         return userId;
     }
+    
+    public String getUserEmailById(int userId) {
+        String result;
+        
+        TypedQuery<String> query = this.entityManager.createQuery("SELECT u.email FROM User u WHERE u.id = :userId", String.class);
+        query.setParameter("userId", userId);
+        result = query.getSingleResult();
+        
+        return result;
+    }
 }

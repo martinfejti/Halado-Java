@@ -10,12 +10,16 @@ import hu.haladojava.milestone2.dto.UserDto;
 import hu.haladojava.milestone2.entity.UserEntity;
 import hu.haladojava.milestone2.mapper.UserMapper;
 import hu.haladojava.milestone2.repository.UserRepository;
+import hu.haladojava.milestone2.util.Constants;
 
 @Service
 public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+    
+    @Autowired
+    private EmailService emailService;
     
     @Autowired
     private UserMapper userMapper;
@@ -45,7 +49,15 @@ public class UserService {
         return file.getName();
     }
     
-    public int approveDocument(int userId) {
-        return this.userRepository.approveDocument(userId);
+    public int approveDocument(int userId, int adminId) {
+        this.userRepository.approveDocument(userId);
+        
+        String userEmail = this.userRepository.getUserEmailById(userId);
+        String adminEmail = this.userRepository.getUserEmailById(adminId);
+        
+        this.emailService.sendEmail(userEmail, Constants.EMAIL_SUBJECT, Constants.STUDENT_EMAIL_TEXT);
+        this.emailService.sendEmail(adminEmail, Constants.EMAIL_SUBJECT, Constants.ADMIN_EMAIL_TEXT);
+        
+        return userId;
     }
 }

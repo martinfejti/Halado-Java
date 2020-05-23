@@ -37,7 +37,7 @@ public class UserController {
     }
     
     @PutMapping("/approveDocument")
-    public int approveDocument(int userId) {
-        return this.userService.approveDocument(userId);
+    public int approveDocument(int userId, int adminId) {
+        return this.userService.approveDocument(userId, adminId);
     }
 }
