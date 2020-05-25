@@ -1,7 +1,10 @@
 package hu.haladojava.milestone2.contoller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -43,5 +46,10 @@ public class UserController {
     @PutMapping("/approveDocument")
     public int approveDocument(@RequestBody ApproveDocumentDto approveDocumentDto) {
         return this.userService.approveDocument(approveDocumentDto.getUserId(), approveDocumentDto.getAdminId());
+    }
+    
+    @GetMapping("/getAllNotAdminUsers")
+    public List<UserDto> getAllNotAdminUsers() {
+        return this.userService.getAllNotAdminUsers();
     }
 }

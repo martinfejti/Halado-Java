@@ -1,6 +1,8 @@
 package hu.haladojava.milestone2.service;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -63,5 +65,17 @@ public class UserService {
         this.emailService.sendEmail(adminEmail, Constants.EMAIL_SUBJECT, Constants.ADMIN_EMAIL_TEXT);
         
         return userId;
+    }
+    
+    public List<UserDto> getAllNotAdminUsers() {
+        List<UserEntity> entityList = this.userRepository.getAllNotAdminUsers();
+        
+        List<UserDto> dtoList = new ArrayList<>();
+        for (UserEntity entity : entityList) {
+            UserDto dto = this.userMapper.mapUserEntityToDto(entity);
+            dtoList.add(dto);
+        }
+        
+        return dtoList;
     }
 }

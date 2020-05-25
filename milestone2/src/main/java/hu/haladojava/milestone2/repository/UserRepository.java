@@ -1,6 +1,7 @@
 package hu.haladojava.milestone2.repository;
 
 import java.io.File;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -63,5 +64,14 @@ public class UserRepository {
         result = query.getSingleResult();
         
         return result;
+    }
+    
+    public List<UserEntity> getAllNotAdminUsers() {
+        List<UserEntity> userList;
+        
+        TypedQuery<UserEntity> query = this.entityManager.createQuery("SELECT u FROM User u WHERE u.isAdmin = 0", UserEntity.class);
+        userList = query.getResultList();
+        
+        return userList;
     }
 }
