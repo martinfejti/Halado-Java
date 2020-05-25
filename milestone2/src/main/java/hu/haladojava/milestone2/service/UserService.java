@@ -36,7 +36,11 @@ public class UserService {
     }
     
     public UserDto getUserByUsernameAndPassword(String username, String password) {
+        System.out.println("SER " + username + ", " + password);
         UserEntity userEntity = this.userRepository.getUserByUsernameAndPassword(username, password);
+        
+        System.out.println(userEntity.getUsername());
+        System.out.println(userEntity.getPassword());
         
         return this.userMapper.mapUserEntityToDto(userEntity);
     }

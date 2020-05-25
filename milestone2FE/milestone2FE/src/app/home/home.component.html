@@ -1,0 +1,16 @@
+<button (click)="logout()" type="button">Kijelentkezés</button>
+<ng-container *ngIf="isAdmin == 'true'">
+    TANÁR felhasználó: {{loggedInUser}} - {{userId}}
+    <p>
+    Hallgatók listája: TODO
+</ng-container>
+<ng-container *ngIf="isAdmin == 'false'">
+   TANULÓ felhasználó: {{loggedInUser}} - {{userId}}
+   <p>
+    <ng-container *ngIf="approvedByUser == 'false'">
+        <button (click)="uploadDocument()" type="button">Dokumentum feltöltése</button>
+    </ng-container>
+    <ng-container *ngIf="approvedByUser == 'true'">
+        Már van feltöltött dokumentuma
+    </ng-container>
+</ng-container>

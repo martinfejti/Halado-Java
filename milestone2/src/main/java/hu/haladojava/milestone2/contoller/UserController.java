@@ -1,16 +1,20 @@
 package hu.haladojava.milestone2.contoller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import hu.haladojava.milestone2.dto.ApproveDocumentDto;
 import hu.haladojava.milestone2.dto.CreateUserDto;
+import hu.haladojava.milestone2.dto.LoginDto;
 import hu.haladojava.milestone2.dto.UserDto;
+import hu.haladojava.milestone2.dto.UserIdDto;
 import hu.haladojava.milestone2.service.UserService;
 
+@CrossOrigin
 @RestController
 public class UserController {
     
@@ -20,10 +24,10 @@ public class UserController {
     public UserController() {
     }
     
-    @GetMapping("/login")
-    public UserDto getUserByUsernameAndPassword(String username, String password) {
-        // annotation on params might be needed
-        return this.userService.getUserByUsernameAndPassword(username, password);
+    @PostMapping("/login")
+    public UserDto getUserByUsernameAndPassword(@RequestBody LoginDto loginDto) {
+        System.out.println("CON " + loginDto.getUsername() + ", " + loginDto.getPassword());
+        return this.userService.getUserByUsernameAndPassword(loginDto.getUsername(), loginDto.getPassword());
     }
     
     @PostMapping("/register")
@@ -32,12 +36,12 @@ public class UserController {
     }
     
     @PutMapping("/uploadDocument")
-    public String uploadDocument(int userId) {
-        return this.userService.uploadDocument(userId);
+    public String uploadDocument(@RequestBody UserIdDto userIdDto) {
+        return this.userService.uploadDocument(userIdDto.getUserId());
     }
     
     @PutMapping("/approveDocument")
-    public int approveDocument(int userId, int adminId) {
-        return this.userService.approveDocument(userId, adminId);
+    public int approveDocument(@RequestBody ApproveDocumentDto approveDocumentDto) {
+        return this.userService.approveDocument(approveDocumentDto.getUserId(), approveDocumentDto.getAdminId());
     }
 }
