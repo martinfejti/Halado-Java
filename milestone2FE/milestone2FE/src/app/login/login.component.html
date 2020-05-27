@@ -1,11 +1,9 @@
-<h1>Login</h1>
-
-<div>
-    <label>Felhasználó név </label>
-    <input name="username" [(ngModel)]="username" type="text" placeholder="Felhasználó név">
-    <p>
-    <label>Jelszó </label>
-    <input name="password" [(ngModel)]="password" type="password" placeholder="Jelszó">
-    <p>
-    <button class="btn btn-primary" (click)="login()" type="button">Bejelentkezés</button>
-</div>
+<form class="form-signin">
+    <h1>Bejelentkezés</h1>
+    <label for="inputUserame" class="sr-only">Felhasználónév</label>
+    
+    <input name="username" [(ngModel)] = "username" id="inputUserame" class="form-control" placeholder="Felhasználónév" required autofocus>
+    <label for="inputPassword" class="sr-only">Jelszó</label>
+    <input name="password" [(ngModel)] = "password" type ="password" id="inputPassword" class="form-control" placeholder="Jelszó" required>
+    <button (click)="login()" class="btn btn-lg btn-primary btn-block" type="button">Bejelentkezés</button>
+</form>
