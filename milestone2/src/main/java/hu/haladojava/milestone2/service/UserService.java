@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import hu.haladojava.milestone2.dto.CreateUserDto;
 import hu.haladojava.milestone2.dto.UserDto;
@@ -38,21 +39,15 @@ public class UserService {
     }
     
     public UserDto getUserByUsernameAndPassword(String username, String password) {
-        System.out.println("SER " + username + ", " + password);
         UserEntity userEntity = this.userRepository.getUserByUsernameAndPassword(username, password);
-        
-        System.out.println(userEntity.getUsername());
-        System.out.println(userEntity.getPassword());
         
         return this.userMapper.mapUserEntityToDto(userEntity);
     }
     
-    public String uploadDocument(int userId) {
-        File file = new File("test.txt");
+    public String uploadDocument(int userId, File document) {
+        this.userRepository.uploadDocument(userId, document);
         
-        this.userRepository.uploadDocument(userId, file);
-        
-        return file.getName();
+        return document.getName();
     }
     
     public int approveDocument(int userId, int adminId) {

@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.web.multipart.MultipartFile;
+
 @Entity(name="User")
 @Table(name="user")
 public class UserEntity {
@@ -100,9 +102,5 @@ public class UserEntity {
 
     public File getDocument() {
         return document;
-    }
-
-    public void setDocument(File document) {
-        this.document = document;
     }
 }

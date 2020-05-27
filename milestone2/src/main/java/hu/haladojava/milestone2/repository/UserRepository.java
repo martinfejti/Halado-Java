@@ -10,6 +10,7 @@ import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 
 import hu.haladojava.milestone2.entity.UserEntity;
 
@@ -67,11 +68,11 @@ public class UserRepository {
     }
     
     public List<UserEntity> getAllNotAdminUsers() {
-        List<UserEntity> userList;
-        
-        TypedQuery<UserEntity> query = this.entityManager.createQuery("SELECT u FROM User u WHERE u.isAdmin = 0", UserEntity.class);
+        List<UserEntity> userList = null;
+
+        TypedQuery<UserEntity> query = this.entityManager.createQuery("SELECT u FROM User u WHERE u.isAdmin = FALSE", UserEntity.class);
         userList = query.getResultList();
-        
+
         return userList;
     }
 }

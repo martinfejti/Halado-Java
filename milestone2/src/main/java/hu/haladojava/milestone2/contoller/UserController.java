@@ -14,7 +14,7 @@ import hu.haladojava.milestone2.dto.ApproveDocumentDto;
 import hu.haladojava.milestone2.dto.CreateUserDto;
 import hu.haladojava.milestone2.dto.LoginDto;
 import hu.haladojava.milestone2.dto.UserDto;
-import hu.haladojava.milestone2.dto.UserIdDto;
+import hu.haladojava.milestone2.dto.UploadDocumentDto;
 import hu.haladojava.milestone2.service.UserService;
 
 @CrossOrigin
@@ -29,7 +29,6 @@ public class UserController {
     
     @PostMapping("/login")
     public UserDto getUserByUsernameAndPassword(@RequestBody LoginDto loginDto) {
-        System.out.println("CON " + loginDto.getUsername() + ", " + loginDto.getPassword());
         return this.userService.getUserByUsernameAndPassword(loginDto.getUsername(), loginDto.getPassword());
     }
     
@@ -39,8 +38,8 @@ public class UserController {
     }
     
     @PutMapping("/uploadDocument")
-    public String uploadDocument(@RequestBody UserIdDto userIdDto) {
-        return this.userService.uploadDocument(userIdDto.getUserId());
+    public String uploadDocument(@RequestBody UploadDocumentDto uploadDocumentDto) {
+        return this.userService.uploadDocument(uploadDocumentDto.getUserId(), uploadDocumentDto.getDocument());
     }
     
     @PutMapping("/approveDocument")

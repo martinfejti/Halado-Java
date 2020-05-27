@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HomeService } from './home.service';
+import { User } from './../models/user.model';
 
 @Component({
   selector: 'app-home',
@@ -15,6 +16,8 @@ export class HomeComponent implements OnInit {
   userId: string;
   approvedByAdmin: string;
   approvedByUser: string;
+  notAdminUsers: User[];
+  uploadedFile: File;
 
 
   constructor(private router: Router, private homeService: HomeService) { }
@@ -25,7 +28,8 @@ export class HomeComponent implements OnInit {
     this.userId = localStorage.getItem('userId');
     this.approvedByAdmin = localStorage.getItem('approvedByAdmin');
     this.approvedByUser = localStorage.getItem('approvedByUser');
-    console.log(this.isAdmin);
+
+    this.getAllNotAdminUsers();
   }
 
   logout() {
@@ -37,12 +41,39 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
-  uploadDocument() {
-    console.log('upload doc function');
-    this.homeService.uploadDocument(+this.userId).subscribe(result => {
+  uploadDocument(uploadedFile: File) {
+    console.log('upload doc');
+    console.log(uploadedFile);
+    this.homeService.uploadDocument(+this.userId, uploadedFile).subscribe(result => {
       console.log('result', result);
+      // this.getAllNotAdminUsers();
+      alert('Dokumentum feltöltése sikeres volt.');
     }, error => {
       console.log(error);
+      alert('Dokumentum feltöltése sikertelen volt! :(');
+    });
+  }
+
+  getAllNotAdminUsers() {
+    console.log('get all not admins');
+    this.homeService.getAllNotAdminUsers().subscribe(result => {
+      console.log('result', result);
+      this.notAdminUsers = result;
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  approveDocument(studentId: number) {
+    console.log('approve doc');
+    console.log('stu id: ', studentId);
+    console.log('admin id: ', +this.userId);
+    this.homeService.approveDocument(studentId, +this.userId).subscribe(result => {
+      console.log('result:', result);
+      alert('Jóváhagyás sikeres! Értesítés elküldve mindkét fél részére.');
+    }, error => {
+      console.log(error);
+      alert('Jóváhagyás sikertelen volt.');
     });
   }
 }
