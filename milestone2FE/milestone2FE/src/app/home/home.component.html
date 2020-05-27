@@ -15,11 +15,7 @@
 <ng-container *ngIf="isAdmin == 'false'">
    TANULÓ felhasználó: {{loggedInUser}} - {{userId}}
    <p>
-    <ng-container *ngIf="approvedByUser == 'false'">
-        <input type="file" [(ngModel)]="uploadedFile">
-        <button (click)="uploadDocument(uploadedFile)" type="button">Dokumentum feltöltése</button>
-    </ng-container>
-    <ng-container *ngIf="approvedByUser == 'true'">
-        Már van feltöltött dokumentuma
-    </ng-container>
+    {{uploadedFile}}
+    <input type="file" [(ngModel)]="uploadedFile">
+    <button (click)="uploadDocument(uploadedFile)" type="button">Dokumentum feltöltése</button>
 </ng-container>
