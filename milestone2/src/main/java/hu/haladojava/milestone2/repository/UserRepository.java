@@ -10,7 +10,6 @@ import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.web.multipart.MultipartFile;
 
 import hu.haladojava.milestone2.entity.UserEntity;
 

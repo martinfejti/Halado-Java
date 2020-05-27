@@ -5,8 +5,6 @@ import java.io.File;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
-import org.springframework.web.multipart.MultipartFile;
-
 public class UserDto {
    
     @NotNull

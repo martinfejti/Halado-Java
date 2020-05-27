@@ -2,8 +2,6 @@ package hu.haladojava.milestone2.dto;
 
 import java.io.File;
 
-import org.springframework.web.multipart.MultipartFile;
-
 public class UploadDocumentDto {
 
     private int userId;
