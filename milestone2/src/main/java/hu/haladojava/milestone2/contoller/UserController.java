@@ -1,5 +1,6 @@
 package hu.haladojava.milestone2.contoller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,8 +42,10 @@ public class UserController {
     }
     
     @PostMapping("/uploadDocument")
-    public String uploadDocument(@RequestParam("document") MultipartFile document) {
+    public String uploadDocument(@RequestParam("document") MultipartFile document, @RequestParam("userId") MultipartFile userId) throws IOException {
         System.out.println(document.getOriginalFilename());
+        String value = new String(userId.getBytes());
+        System.out.println(value);
         int id = 3;
         return this.userService.uploadDocument(id, document);
     }

@@ -49,8 +49,10 @@ export class HomeComponent implements OnInit {
     console.log('upload doc');
     const file: File = this.fileToUpload;
     console.log(file);
+    console.log(this.userId);
     const formData = new FormData();
     formData.append('document', file, file.name);
+    formData.append('userId', new Blob([this.userId]), 'id');
     console.log(formData);
     this.homeService.uploadDocument(+this.userId, formData).subscribe(result => {
       console.log('result', result);
