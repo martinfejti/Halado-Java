@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
   approvedByAdmin: string;
   approvedByUser: string;
   notAdminUsers: User[];
-  uploadedFile: File;
+  fileToUpload: File;
 
 
   constructor(private router: Router, private homeService: HomeService) { }
@@ -41,10 +41,18 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
-  uploadDocument(uploadedFile: File) {
+  handleFileInput(files: FileList) {
+    this.fileToUpload = files.item(0);
+  }
+
+  uploadDocument() {
     console.log('upload doc');
-    console.log(uploadedFile);
-    this.homeService.uploadDocument(+this.userId, uploadedFile).subscribe(result => {
+    const file: File = this.fileToUpload;
+    console.log(file);
+    const formData = new FormData();
+    formData.append('document', file, file.name);
+    console.log(formData);
+    this.homeService.uploadDocument(+this.userId, formData).subscribe(result => {
       console.log('result', result);
       // this.getAllNotAdminUsers();
       alert('Dokumentum feltöltése sikeres volt.');

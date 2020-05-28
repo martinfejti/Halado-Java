@@ -10,6 +10,7 @@ import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 
 import hu.haladojava.milestone2.entity.UserEntity;
 
@@ -41,7 +42,7 @@ public class UserRepository {
         return result;
     }
     
-    public void uploadDocument(int userId, File file) {
+    public void uploadDocument(int userId, MultipartFile file) {
         Query query = this.entityManager.createQuery("UPDATE User u SET u.document = :file, u.documentIsApprovedByUser = TRUE WHERE u.id = :userId");
         query.setParameter("userId", userId);
         query.setParameter("file", file);

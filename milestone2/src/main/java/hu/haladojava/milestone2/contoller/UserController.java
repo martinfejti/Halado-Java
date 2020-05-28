@@ -8,7 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import hu.haladojava.milestone2.dto.ApproveDocumentDto;
 import hu.haladojava.milestone2.dto.CreateUserDto;
@@ -37,9 +40,11 @@ public class UserController {
         return this.userService.createUserEntity(createUserDto);
     }
     
-    @PutMapping("/uploadDocument")
-    public String uploadDocument(@RequestBody UploadDocumentDto uploadDocumentDto) {
-        return this.userService.uploadDocument(uploadDocumentDto.getUserId(), uploadDocumentDto.getDocument());
+    @PostMapping("/uploadDocument")
+    public String uploadDocument(@RequestParam("document") MultipartFile document) {
+        System.out.println(document.getOriginalFilename());
+        int id = 3;
+        return this.userService.uploadDocument(id, document);
     }
     
     @PutMapping("/approveDocument")

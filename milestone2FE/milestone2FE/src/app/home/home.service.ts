@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 import { User } from './../models/user.model';
 
 @Injectable()
@@ -7,12 +8,14 @@ export class HomeService {
 
   constructor(private httpClient: HttpClient) {}
 
-  uploadDocument(id: number, uploadedFile: File) {
+  uploadDocument(id: number, file: FormData) {
     console.log('home service');
-    return this.httpClient.put('http://localhost:8080/uploadDocument', {
-      userId: id,
-      document: uploadedFile
-    });
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Accept: 'application/json'
+      })
+    };
+    return this.httpClient.post('http://localhost:8080/uploadDocument', file, httpOptions);
   }
 
   getAllNotAdminUsers() {

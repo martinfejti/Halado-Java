@@ -16,6 +16,8 @@
    TANULÓ felhasználó: {{loggedInUser}} - {{userId}}
    <p>
     {{uploadedFile}}
-    <input type="file" [(ngModel)]="uploadedFile">
-    <button (click)="uploadDocument(uploadedFile)" type="button">Dokumentum feltöltése</button>
+    <form class="vertical-center" enctype="multipart/form-data">
+        <input type="file" (change)="handleFileInput($event.target.files)">
+        <button (click)="uploadDocument()" type="button">Dokumentum feltöltése</button>
+    </form>
 </ng-container>
