@@ -1,12 +1,11 @@
 package hu.haladojava.milestone2.entity;
 
-import java.io.File;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 @Entity(name="User")
@@ -37,7 +36,8 @@ public class UserEntity {
     private boolean documentIsApprovedByAdmin;
     
     @Column(name="document")
-    private File document;
+    @Lob
+    private byte[] document;
     
     public UserEntity() {
     }
@@ -98,7 +98,7 @@ public class UserEntity {
         this.documentIsApprovedByAdmin = documentIsApprovedByAdmin;
     }
 
-    public File getDocument() {
+    public byte[] getDocument() {
         return document;
     }
 }

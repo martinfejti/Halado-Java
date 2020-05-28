@@ -1,7 +1,5 @@
 package hu.haladojava.milestone2.dto;
 
-import java.io.File;
-
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
@@ -27,7 +25,7 @@ public class UserDto {
     
     private boolean documentIsApprovedByAdmin;
     
-    private File document;
+    private byte[] document;
     
     public UserDto() {
     }
@@ -88,11 +86,11 @@ public class UserDto {
         this.documentIsApprovedByAdmin = documentIsApprovedByAdmin;
     }
 
-    public File getDocument() {
+    public byte[] getDocument() {
         return document;
     }
 
-    public void setDocument(File document) {
+    public void setDocument(byte[] document) {
         this.document = document;
     }
 }

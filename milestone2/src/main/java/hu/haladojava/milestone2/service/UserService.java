@@ -1,6 +1,6 @@
 package hu.haladojava.milestone2.service;
 
-import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,10 +44,11 @@ public class UserService {
         return this.userMapper.mapUserEntityToDto(userEntity);
     }
     
-    public String uploadDocument(int userId, MultipartFile document) {
-        this.userRepository.uploadDocument(userId, document);
+    public String uploadDocument(MultipartFile userId, MultipartFile document) throws IOException {
+        int convertedUserId = convertUserId(userId);
+        this.userRepository.uploadDocument(convertedUserId, document.getBytes());
         
-        return document.getName();
+        return document.getOriginalFilename();
     }
     
     public int approveDocument(int userId, int adminId) {
@@ -72,5 +73,11 @@ public class UserService {
         }
         
         return dtoList;
+    }
+    
+    private int convertUserId(MultipartFile userId) throws IOException {
+        String value = new String(userId.getBytes());
+        
+        return Integer.parseInt(value);
     }
 }

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,7 +17,6 @@ import hu.haladojava.milestone2.dto.ApproveDocumentDto;
 import hu.haladojava.milestone2.dto.CreateUserDto;
 import hu.haladojava.milestone2.dto.LoginDto;
 import hu.haladojava.milestone2.dto.UserDto;
-import hu.haladojava.milestone2.dto.UploadDocumentDto;
 import hu.haladojava.milestone2.service.UserService;
 
 @CrossOrigin
@@ -46,8 +44,7 @@ public class UserController {
         System.out.println(document.getOriginalFilename());
         String value = new String(userId.getBytes());
         System.out.println(value);
-        int id = 3;
-        return this.userService.uploadDocument(id, document);
+        return this.userService.uploadDocument(userId, document);
     }
     
     @PutMapping("/approveDocument")
