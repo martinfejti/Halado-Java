@@ -65,7 +65,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  downloadFile(file: File) {
+  downloadFile(file: Blob) {
     const blob = new Blob([file], {type: 'text/csv'});
     saveAs(blob, 'test.txt');
     /*

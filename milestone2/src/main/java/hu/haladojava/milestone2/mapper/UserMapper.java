@@ -22,7 +22,10 @@ public class UserMapper {
         userDto.setAdmin(userEntity.getIsAdmin());
         userDto.setDocumentIsApprovedByAdmin(userEntity.isDocumentIsApprovedByAdmin());
         userDto.setDocumentIsApprovedByUser(userEntity.isDocumentIsApprovedByUser());
-        userDto.setDocument(userEntity.getDocument());            
+        
+        if (userEntity.getDocument() != null) {
+            userDto.setDocument(new String(userEntity.getDocument()));              
+        }
 
         return userDto;
     }

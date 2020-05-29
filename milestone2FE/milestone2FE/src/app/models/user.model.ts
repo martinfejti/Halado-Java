@@ -6,5 +6,5 @@ export class User {
     public isAdmin: boolean;
     public documentIsApprovedByAdmin: boolean;
     public documentIsApprovedByUser: boolean;
-    public document: File;
+    public document: Blob;
 }

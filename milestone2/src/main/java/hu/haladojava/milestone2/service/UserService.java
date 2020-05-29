@@ -46,6 +46,7 @@ public class UserService {
     
     public String uploadDocument(MultipartFile userId, MultipartFile document) throws IOException {
         int convertedUserId = convertUserId(userId);
+        System.out.println("SERV be: " + document.getBytes());
         this.userRepository.uploadDocument(convertedUserId, document.getBytes());
         
         return document.getOriginalFilename();

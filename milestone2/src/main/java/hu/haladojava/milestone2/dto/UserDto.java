@@ -25,7 +25,7 @@ public class UserDto {
     
     private boolean documentIsApprovedByAdmin;
     
-    private byte[] document;
+    private String document;
     
     public UserDto() {
     }
@@ -86,11 +86,11 @@ public class UserDto {
         this.documentIsApprovedByAdmin = documentIsApprovedByAdmin;
     }
 
-    public byte[] getDocument() {
+    public String getDocument() {
         return document;
     }
 
-    public void setDocument(byte[] document) {
+    public void setDocument(String document) {
         this.document = document;
     }
 }
