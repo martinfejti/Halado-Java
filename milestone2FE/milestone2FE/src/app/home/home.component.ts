@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HomeService } from './home.service';
 import { User } from './../models/user.model';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-home',
@@ -62,6 +63,19 @@ export class HomeComponent implements OnInit {
       console.log(error);
       alert('Dokumentum feltöltése sikertelen volt! :(');
     });
+  }
+
+  downloadFile(file: File) {
+    const blob = new Blob([file], {type: 'text/csv'});
+    saveAs(blob, 'test.txt');
+    /*
+    const url = window.URL.createObjectURL(blob);
+
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'test.txt';
+    link.click();
+    */
   }
 
   getAllNotAdminUsers() {

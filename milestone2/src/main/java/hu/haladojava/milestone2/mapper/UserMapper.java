@@ -22,8 +22,8 @@ public class UserMapper {
         userDto.setAdmin(userEntity.getIsAdmin());
         userDto.setDocumentIsApprovedByAdmin(userEntity.isDocumentIsApprovedByAdmin());
         userDto.setDocumentIsApprovedByUser(userEntity.isDocumentIsApprovedByUser());
-        userDto.setDocument(userEntity.getDocument());
-        
+        userDto.setDocument(userEntity.getDocument());            
+
         return userDto;
     }
     
@@ -39,4 +39,22 @@ public class UserMapper {
 
         return userEntity;
     }
+    
+//    private File convertByteArrayToFile(byte[] byteArray) throws IOException {
+//        System.out.println(byteArray);
+//        if (byteArray.length > 0 && byteArray != null) {
+//            System.out.println("nem üres");
+//            File tempFile = File.createTempFile("test", ".txt");
+//            FileOutputStream fos = new FileOutputStream(tempFile);
+//            fos.write(byteArray);
+//            fos.close();
+//            
+//            return tempFile;
+//        } else {
+//            System.out.println("üres");
+//            File tempFile = File.createTempFile("test", ".txt");
+//            return tempFile;
+//        }
+//        
+//    }
 }
