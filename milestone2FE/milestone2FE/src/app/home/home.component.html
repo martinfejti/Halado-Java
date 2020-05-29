@@ -6,8 +6,8 @@
     <ng-container *ngFor="let user of notAdminUsers">
         <p>
         {{user.username}}
-        <button type="button" (click)="downloadFile(user.document)">Letöltés</button>
         <ng-container *ngIf="user.document">
+            <button type="button" (click)="downloadFile(user.document)">Letöltés</button>
             <button type="button" (click)="approveDocument(user.id)" >Approve this document</button>
         </ng-container>
     </ng-container>
