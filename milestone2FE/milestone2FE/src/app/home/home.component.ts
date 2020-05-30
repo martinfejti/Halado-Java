@@ -115,4 +115,16 @@ export class HomeComponent implements OnInit {
       alert('Jóváhagyás sikertelen volt.');
     });
   }
+
+  refuseDocument(id: number) {
+    console.log('refuse doc');
+    console.log(id);
+    this.homeService.refuseDocument(id).subscribe(result => {
+      console.log('result: ', result);
+      alert('Értesítés sikeresen elküldve');
+    }, error => {
+      console.log(error);
+      alert('Hiba történt az értesítés elküldése közben');
+    });
+  }
 }

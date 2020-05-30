@@ -36,4 +36,11 @@ export class HomeService {
       userId: id
     });
   }
+
+  refuseDocument(id: number) {
+    console.log('home service');
+    return this.httpClient.post('http://localhost:8080/refuseDocument', {
+      userId: id
+    });
+  }
 }

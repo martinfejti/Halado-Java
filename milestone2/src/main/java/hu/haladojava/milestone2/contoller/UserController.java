@@ -68,4 +68,9 @@ public class UserController {
     public UserDto getUserById(@RequestBody UserIdDto userIdDto) {
         return this.userService.getUserById(userIdDto.getUserId());
     }
+    
+    @PostMapping("/refuseDocument")
+    public void refuseDocument(@RequestBody UserIdDto userIdDto) {
+        this.userService.refuseDocument(userIdDto.getUserId());
+    }
 }

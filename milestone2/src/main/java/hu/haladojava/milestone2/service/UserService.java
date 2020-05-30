@@ -83,6 +83,12 @@ public class UserService {
         return this.userMapper.mapUserEntityToDto(userEntity);
     }
     
+    public void refuseDocument(int userId) {
+        String userEmail = this.userRepository.getUserEmailById(userId);
+        
+        this.emailService.sendEmail(userEmail, Constants.NEGATIVE_EMAIL_SUBJECT, Constants.NEGATIVE_EMAIL_TEXT);
+    }
+    
     private int convertUserId(MultipartFile userId) throws IOException {
         String value = new String(userId.getBytes());
         
