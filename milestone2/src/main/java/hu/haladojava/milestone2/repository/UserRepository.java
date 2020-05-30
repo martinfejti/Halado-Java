@@ -73,4 +73,10 @@ public class UserRepository {
 
         return userList;
     }
+    
+    public void deleteDocument(int userId) {
+        Query query = this.entityManager.createQuery("UPDATE User u SET u.document = NULL, u.documentIsApprovedByUser = FALSE, u.documentIsApprovedByAdmin = FALSE WHERE u.id = :userId");
+        query.setParameter("userId", userId);
+        query.executeUpdate();
+    }
 }

@@ -17,6 +17,7 @@ import hu.haladojava.milestone2.dto.ApproveDocumentDto;
 import hu.haladojava.milestone2.dto.CreateUserDto;
 import hu.haladojava.milestone2.dto.LoginDto;
 import hu.haladojava.milestone2.dto.UserDto;
+import hu.haladojava.milestone2.dto.UserIdDto;
 import hu.haladojava.milestone2.service.UserService;
 
 @CrossOrigin
@@ -56,5 +57,10 @@ public class UserController {
     @GetMapping("/getAllNotAdminUsers")
     public List<UserDto> getAllNotAdminUsers() {
         return this.userService.getAllNotAdminUsers();
+    }
+    
+    @PutMapping("/deleteDocument")
+    public void deleteDocument(@RequestBody UserIdDto userIdDto) {
+        this.userService.deleteDocument(userIdDto.getUserId());
     }
 }

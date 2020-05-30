@@ -75,6 +75,10 @@ public class UserService {
         return dtoList;
     }
     
+    public void deleteDocument(int userId) {
+        this.userRepository.deleteDocument(userId);
+    }
+    
     private int convertUserId(MultipartFile userId) throws IOException {
         String value = new String(userId.getBytes());
         
