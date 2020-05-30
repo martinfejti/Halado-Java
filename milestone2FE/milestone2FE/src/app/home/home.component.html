@@ -9,7 +9,12 @@
         {{user.username}}
         <ng-container *ngIf="user.document">
             <button type="button" (click)="downloadFile(user.document)">Letöltés</button>
-            <button type="button" (click)="approveDocument(user.id)" >Approve this document</button>
+            <ng-container *ngIf="!user.documentIsApprovedByAdmin">
+                <button type="button" (click)="approveDocument(user.id)" >Approve this document</button>
+            </ng-container>
+            <ng-container *ngIf="user.documentIsApprovedByAdmin">
+                Már el lett fogadva
+            </ng-container>
         </ng-container>
     </ng-container>
 </ng-container>

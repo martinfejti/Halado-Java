@@ -109,6 +109,7 @@ export class HomeComponent implements OnInit {
     this.homeService.approveDocument(studentId, this.userFromService.id).subscribe(result => {
       console.log('result:', result);
       alert('Jóváhagyás sikeres! Értesítés elküldve mindkét fél részére.');
+      this.getAllNotAdminUsers();
     }, error => {
       console.log(error);
       alert('Jóváhagyás sikertelen volt.');
