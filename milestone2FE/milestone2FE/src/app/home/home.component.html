@@ -1,6 +1,7 @@
-<button (click)="logout()" type="button">Kijelentkezés</button>
+<button class="btn btn-primary" [ngStyle]="{'float': 'right', 'margin-right': '20px'}" (click)="logout()" type="button">Kijelentkezés</button>
 <ng-container *ngIf="isAdmin == 'true'">
-    TANÁR felhasználó: {{loggedInUser}} - {{userId}}
+    <h1>Bejelentkezve, mint: {{loggedInUser}}</h1>
+    <h3>Jogkör: TANÁR</h3>
     <p>
     <h3>Hallgatók listája:</h3> 
     <ng-container *ngFor="let user of notAdminUsers">
@@ -13,11 +14,15 @@
     </ng-container>
 </ng-container>
 <ng-container *ngIf="isAdmin == 'false'">
-   TANULÓ felhasználó: {{loggedInUser}} - {{userId}}
+   <h1>Bejelentkezve, mint: {{loggedInUser}}</h1>
+   <h3>Jogkör: TANULÓ</h3>
    <p>
-    {{uploadedFile}}
+    <h3>Dokumentum feltöltése:</h3>
     <form class="vertical-center" enctype="multipart/form-data">
-        <input type="file" accept=".txt" (change)="handleFileInput($event.target.files)">
-        <button (click)="uploadDocument()" type="button">Dokumentum feltöltése</button>
+        <input type="file" accept=".txt" [ngStyle]="{'margin-left': '10px'}" (change)="handleFileInput($event.target.files)">
+        <p>
+        <p>
+        <p>
+        <button class="btn btn-primary" [ngStyle]="{'margin-left': '10px'}" (click)="uploadDocument()" type="button">Dokumentum feltöltése</button>
     </form>
 </ng-container>
