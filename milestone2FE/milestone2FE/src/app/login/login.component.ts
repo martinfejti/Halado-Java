@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoginService } from './login.service';
 import { Router } from '@angular/router';
 import { User } from './../models/user.model';
+import { StoreService } from './../store/store.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
   password: string;
   user: User;
 
-  constructor(private loginService: LoginService, private router: Router) { }
+  constructor(private loginService: LoginService, private router: Router, private storeService: StoreService) { }
 
   ngOnInit() {
   }
@@ -27,6 +28,7 @@ export class LoginComponent implements OnInit {
       this.loginService.login(this.username, this.password).subscribe(result => {
         console.log('result: ', result);
         this.user = result;
+        this.storeService.storeUser(result);
         localStorage.setItem('loggedInUser', this.user.username);
         localStorage.setItem('adminFlag', JSON.stringify(this.user.isAdmin));
         localStorage.setItem('userId', JSON.stringify(this.user.id));

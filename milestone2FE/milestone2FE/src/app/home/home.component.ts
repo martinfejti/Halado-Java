@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HomeService } from './home.service';
 import { User } from './../models/user.model';
 import { saveAs } from 'file-saver';
+import { StoreService } from './../store/store.service';
 
 @Component({
   selector: 'app-home',
@@ -12,33 +13,22 @@ import { saveAs } from 'file-saver';
 })
 export class HomeComponent implements OnInit {
 
-  loggedInUser: string;
-  isAdmin: string;
-  userId: string;
-  approvedByAdmin: string;
-  approvedByUser: string;
+  userFromService: User;
   notAdminUsers: User[];
   fileToUpload: File;
 
 
-  constructor(private router: Router, private homeService: HomeService) { }
+  constructor(private router: Router, private homeService: HomeService, private storeService: StoreService) { }
 
   ngOnInit() {
-    this.loggedInUser = localStorage.getItem('loggedInUser');
-    this.isAdmin = localStorage.getItem('adminFlag');
-    this.userId = localStorage.getItem('userId');
-    this.approvedByAdmin = localStorage.getItem('approvedByAdmin');
-    this.approvedByUser = localStorage.getItem('approvedByUser');
+
+    this.userFromService = this.storeService.getUser();
+    console.log(this.userFromService);
 
     this.getAllNotAdminUsers();
   }
 
   logout() {
-    localStorage.removeItem('loggedInUser');
-    localStorage.removeItem('adminFlag');
-    localStorage.removeItem('userId');
-    localStorage.removeItem('approvedByAdmin');
-    localStorage.removeItem('approvedByUser');
     this.router.navigate(['/']);
   }
 
@@ -50,12 +40,11 @@ export class HomeComponent implements OnInit {
     console.log('upload doc');
     const file: File = this.fileToUpload;
     console.log(file);
-    console.log(this.userId);
     const formData = new FormData();
     formData.append('document', file, file.name);
-    formData.append('userId', new Blob([this.userId]), 'id');
+    formData.append('userId', new Blob([this.userFromService.id.toString()]), 'id');
     console.log(formData);
-    this.homeService.uploadDocument(+this.userId, formData).subscribe(result => {
+    this.homeService.uploadDocument(this.userFromService.id, formData).subscribe(result => {
       console.log('result', result);
       // this.getAllNotAdminUsers();
       alert('Dokumentum feltöltése sikeres volt.');
@@ -91,8 +80,8 @@ export class HomeComponent implements OnInit {
   approveDocument(studentId: number) {
     console.log('approve doc');
     console.log('stu id: ', studentId);
-    console.log('admin id: ', +this.userId);
-    this.homeService.approveDocument(studentId, +this.userId).subscribe(result => {
+    console.log('admin id: ', this.userFromService.id);
+    this.homeService.approveDocument(studentId, this.userFromService.id).subscribe(result => {
       console.log('result:', result);
       alert('Jóváhagyás sikeres! Értesítés elküldve mindkét fél részére.');
     }, error => {

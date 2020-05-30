@@ -1,6 +1,6 @@
 <button class="btn btn-primary" [ngStyle]="{'float': 'right', 'margin-right': '20px'}" (click)="logout()" type="button">Kijelentkezés</button>
-<ng-container *ngIf="isAdmin == 'true'">
-    <h1>Bejelentkezve, mint: {{loggedInUser}}</h1>
+<ng-container *ngIf="userFromService.isAdmin == true">
+    <h1>Bejelentkezve, mint: {{userFromService.username}}</h1>
     <h3>Jogkör: TANÁR</h3>
     <p>
     <h3>Hallgatók listája:</h3> 
@@ -13,8 +13,8 @@
         </ng-container>
     </ng-container>
 </ng-container>
-<ng-container *ngIf="isAdmin == 'false'">
-   <h1>Bejelentkezve, mint: {{loggedInUser}}</h1>
+<ng-container *ngIf="userFromService.isAdmin == false">
+   <h1>Bejelentkezve, mint: {{userFromService.username}}</h1>
    <h3>Jogkör: TANULÓ</h3>
    <p>
     <h3>Dokumentum feltöltése:</h3>
