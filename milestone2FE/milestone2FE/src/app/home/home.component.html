@@ -18,11 +18,16 @@
    <h3>Jogkör: TANULÓ</h3>
    <p>
     <h3>Dokumentum feltöltése:</h3>
-    <form class="vertical-center" enctype="multipart/form-data">
-        <input type="file" accept=".txt" [ngStyle]="{'margin-left': '10px'}" (change)="handleFileInput($event.target.files)">
-        <p>
-        <p>
-        <p>
-        <button class="btn btn-primary" [ngStyle]="{'margin-left': '10px'}" (click)="uploadDocument()" type="button">Dokumentum feltöltése</button>
-    </form>
+    <ng-container *ngIf="!userFromService.document">
+        <form class="vertical-center" enctype="multipart/form-data">
+            <input type="file" accept=".txt" [ngStyle]="{'margin-left': '10px'}" (change)="handleFileInput($event.target.files)">
+            <p>
+            <p>
+            <p>
+            <button class="btn btn-primary" [ngStyle]="{'margin-left': '10px'}" (click)="uploadDocument()" type="button">Dokumentum feltöltése</button>
+        </form>
+    </ng-container>
+    <ng-container *ngIf="userFromService.document">
+        Már van feltöltött dokumentuma
+    </ng-container>
 </ng-container>
