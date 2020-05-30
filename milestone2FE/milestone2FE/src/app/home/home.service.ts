@@ -29,4 +29,11 @@ export class HomeService {
       adminId: teacherId
     });
   }
+
+  deleteDocument(id: number) {
+    console.log('home service');
+    return this.httpClient.put('http://localhost:8080/deleteDocument', {
+      userId: id
+    });
+  }
 }

@@ -54,6 +54,18 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  deleteDocument() {
+    console.log('delete doc');
+    console.log(this.userFromService.id);
+
+    this.homeService.deleteDocument(this.userFromService.id).subscribe(result => {
+      console.log('result: ', result);
+      alert('Dokumentum törlése sikeres volt');
+    }, error => {
+      console.log(error);
+    });
+  }
+
   downloadFile(file: Blob) {
     const blob = new Blob([file], {type: 'text/csv'});
     saveAs(blob, 'test.txt');

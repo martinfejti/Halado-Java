@@ -29,5 +29,9 @@
     </ng-container>
     <ng-container *ngIf="userFromService.document">
         Már van feltöltött dokumentuma
+        <p>
+        <button type="button" class="btn btn-primary" [ngStyle]="{'margin-left': '10px'}" (click)="downloadFile(userFromService.document)">Letöltés</button>
+        <p>
+        <button type="button" class="btn btn-primary" [ngStyle]="{'margin-left': '10px'}" (click)="deleteDocument()">Dokumentum törlése</button>
     </ng-container>
 </ng-container>
