@@ -42,11 +42,11 @@ public class UserController {
     }
     
     @PostMapping("/uploadDocument")
-    public String uploadDocument(@RequestParam("document") MultipartFile document, @RequestParam("userId") MultipartFile userId) throws IOException {
+    public void uploadDocument(@RequestParam("document") MultipartFile document, @RequestParam("userId") MultipartFile userId) throws IOException {
         System.out.println(document.getOriginalFilename());
         String value = new String(userId.getBytes());
         System.out.println(value);
-        return this.userService.uploadDocument(userId, document);
+        this.userService.uploadDocument(userId, document);
     }
     
     @PutMapping("/approveDocument")

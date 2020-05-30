@@ -43,12 +43,10 @@ public class UserService {
         return this.userMapper.mapUserEntityToDto(userEntity);
     }
     
-    public String uploadDocument(MultipartFile userId, MultipartFile document) throws IOException {
+    public void uploadDocument(MultipartFile userId, MultipartFile document) throws IOException {
         int convertedUserId = convertUserId(userId);
         System.out.println("SERV be: " + document.getBytes());
         this.userRepository.uploadDocument(convertedUserId, document.getBytes());
-        
-        return document.getOriginalFilename();
     }
     
     public int approveDocument(int userId, int adminId) {

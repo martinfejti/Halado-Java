@@ -49,8 +49,7 @@ export class HomeComponent implements OnInit {
       // this.getAllNotAdminUsers();
       alert('Dokumentum feltöltése sikeres volt.');
     }, error => {
-      console.log(error);
-      alert('Dokumentum feltöltése sikertelen volt! :(');
+      console.log('Dokumentum feltöltése sikertelen volt');
     });
   }
 
@@ -61,6 +60,7 @@ export class HomeComponent implements OnInit {
     this.homeService.deleteDocument(this.userFromService.id).subscribe(result => {
       console.log('result: ', result);
       alert('Dokumentum törlése sikeres volt');
+      // this.getAllNotAdminUsers();
     }, error => {
       console.log(error);
     });
