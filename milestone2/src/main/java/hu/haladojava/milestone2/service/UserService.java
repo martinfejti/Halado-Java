@@ -77,6 +77,12 @@ public class UserService {
         this.userRepository.deleteDocument(userId);
     }
     
+    public UserDto getUserById(int userId) {
+        UserEntity userEntity = this.userRepository.getUserById(userId);
+        
+        return this.userMapper.mapUserEntityToDto(userEntity);
+    }
+    
     private int convertUserId(MultipartFile userId) throws IOException {
         String value = new String(userId.getBytes());
         

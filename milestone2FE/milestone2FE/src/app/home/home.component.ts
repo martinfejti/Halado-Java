@@ -48,6 +48,13 @@ export class HomeComponent implements OnInit {
       console.log('result', result);
       // this.getAllNotAdminUsers();
       alert('Dokumentum feltöltése sikeres volt.');
+      this.storeService.getUserById(this.userFromService.id).subscribe(newResult => {
+        console.log('new result: ', newResult);
+        this.userFromService = newResult;
+      }, error => {
+        console.log(error);
+        console.log('Hiba történt az oldal újratöltése közben');
+      });
     }, error => {
       console.log('Dokumentum feltöltése sikertelen volt');
     });
@@ -60,7 +67,13 @@ export class HomeComponent implements OnInit {
     this.homeService.deleteDocument(this.userFromService.id).subscribe(result => {
       console.log('result: ', result);
       alert('Dokumentum törlése sikeres volt');
-      // this.getAllNotAdminUsers();
+      this.storeService.getUserById(this.userFromService.id).subscribe(newResult => {
+        console.log('new result: ', newResult);
+        this.userFromService = newResult;
+      }, error => {
+        console.log(error);
+        console.log('Hiba történt az oldal újratöltése közben');
+      });
     }, error => {
       console.log(error);
     });

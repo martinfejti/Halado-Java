@@ -79,4 +79,14 @@ public class UserRepository {
         query.setParameter("userId", userId);
         query.executeUpdate();
     }
+    
+    public UserEntity getUserById(int userId) {
+        UserEntity result;
+        
+        TypedQuery<UserEntity> query = this.entityManager.createQuery("SELECT u FROM User u WHERE u.id = :userId", UserEntity.class);
+        query.setParameter("userId", userId);
+        result = query.getSingleResult();
+        
+        return result;
+    }
 }

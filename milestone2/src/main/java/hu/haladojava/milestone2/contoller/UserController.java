@@ -63,4 +63,9 @@ public class UserController {
     public void deleteDocument(@RequestBody UserIdDto userIdDto) {
         this.userService.deleteDocument(userIdDto.getUserId());
     }
+    
+    @PostMapping("/getUserById")
+    public UserDto getUserById(@RequestBody UserIdDto userIdDto) {
+        return this.userService.getUserById(userIdDto.getUserId());
+    }
 }
