@@ -23,10 +23,11 @@ import hu.haladojava.milestone2.service.UserService;
 @RestController
 public class UserController {
     
-    @Autowired
     private UserService userService;
     
-    public UserController() {
+    @Autowired
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
     
     @PostMapping("/login")

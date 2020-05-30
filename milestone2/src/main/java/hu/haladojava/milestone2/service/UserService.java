@@ -18,16 +18,15 @@ import hu.haladojava.milestone2.util.Constants;
 @Service
 public class UserService {
 
-    @Autowired
     private UserRepository userRepository;
-    
-    @Autowired
     private EmailService emailService;
-    
-    @Autowired
     private UserMapper userMapper;
     
-    public UserService() {
+    @Autowired
+    public UserService(UserRepository userRepository, EmailService emailService, UserMapper userMapper) {
+        this.userRepository = userRepository;
+        this.emailService = emailService;
+        this.userMapper = userMapper;
     }
     
     public UserDto createUserEntity(CreateUserDto createUserDto) {
