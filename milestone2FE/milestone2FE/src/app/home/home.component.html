@@ -16,6 +16,9 @@
                 Már el lett fogadva
             </ng-container>
         </ng-container>
+        <ng-container *ngIf="!user.document">
+            A hallgató még nem töltött fel dokumentumot
+        </ng-container>
     </ng-container>
 </ng-container>
 <ng-container *ngIf="userFromService.isAdmin == false">
