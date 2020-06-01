@@ -1,8 +1,13 @@
 package hu.haladojava.milestone2.dto;
 
+import javax.validation.constraints.NotNull;
+
 public class LoginDto {
 
+    @NotNull
     private String username;
+    
+    @NotNull
     private String password;
     
     public LoginDto() {

@@ -1,8 +1,13 @@
 package hu.haladojava.milestone2.dto;
 
+import javax.validation.constraints.NotNull;
+
 public class ApproveDocumentDto {
 
+    @NotNull
     private int userId;
+    
+    @NotNull
     private int adminId;
     
     public ApproveDocumentDto() {
