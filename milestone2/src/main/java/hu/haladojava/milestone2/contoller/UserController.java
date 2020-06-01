@@ -43,9 +43,6 @@ public class UserController {
     
     @PostMapping("/uploadDocument")
     public void uploadDocument(@RequestParam("document") MultipartFile document, @RequestParam("userId") MultipartFile userId) throws IOException {
-        System.out.println(document.getOriginalFilename());
-        String value = new String(userId.getBytes());
-        System.out.println(value);
         this.userService.uploadDocument(userId, document);
     }
     
