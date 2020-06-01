@@ -18,6 +18,7 @@ import hu.haladojava.milestone2.dto.CreateUserDto;
 import hu.haladojava.milestone2.dto.LoginDto;
 import hu.haladojava.milestone2.dto.UserDto;
 import hu.haladojava.milestone2.dto.UserIdDto;
+import hu.haladojava.milestone2.exception.ServiceException;
 import hu.haladojava.milestone2.service.UserService;
 
 @CrossOrigin
@@ -32,7 +33,7 @@ public class UserController {
     }
     
     @PostMapping("/login")
-    public UserDto getUserByUsernameAndPassword(@RequestBody LoginDto loginDto) {
+    public UserDto getUserByUsernameAndPassword(@RequestBody LoginDto loginDto) throws Exception {
         return this.userService.getUserByUsernameAndPassword(loginDto.getUsername(), loginDto.getPassword());
     }
     
@@ -47,12 +48,12 @@ public class UserController {
     }
     
     @PutMapping("/approveDocument")
-    public int approveDocument(@RequestBody ApproveDocumentDto approveDocumentDto) {
+    public int approveDocument(@RequestBody ApproveDocumentDto approveDocumentDto) throws ServiceException {
         return this.userService.approveDocument(approveDocumentDto.getUserId(), approveDocumentDto.getAdminId());
     }
     
     @GetMapping("/getAllNotAdminUsers")
-    public List<UserDto> getAllNotAdminUsers() {
+    public List<UserDto> getAllNotAdminUsers() throws ServiceException {
         return this.userService.getAllNotAdminUsers();
     }
     
@@ -62,7 +63,7 @@ public class UserController {
     }
     
     @PostMapping("/getUserById")
-    public UserDto getUserById(@RequestBody UserIdDto userIdDto) {
+    public UserDto getUserById(@RequestBody UserIdDto userIdDto) throws ServiceException {
         return this.userService.getUserById(userIdDto.getUserId());
     }
     

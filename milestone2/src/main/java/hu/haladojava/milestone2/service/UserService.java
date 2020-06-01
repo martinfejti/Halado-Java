@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import hu.haladojava.milestone2.dto.CreateUserDto;
 import hu.haladojava.milestone2.dto.UserDto;
 import hu.haladojava.milestone2.entity.UserEntity;
+import hu.haladojava.milestone2.exception.ServiceException;
 import hu.haladojava.milestone2.mapper.UserMapper;
 import hu.haladojava.milestone2.repository.UserRepository;
 import hu.haladojava.milestone2.util.Constants;
@@ -37,10 +38,14 @@ public class UserService {
         return this.userMapper.mapUserEntityToDto(userEntity);
     }
     
-    public UserDto getUserByUsernameAndPassword(String username, String password) {
+    public UserDto getUserByUsernameAndPassword(String username, String password) throws ServiceException {
         UserEntity userEntity = this.userRepository.getUserByUsernameAndPassword(username, password);
-        
-        return this.userMapper.mapUserEntityToDto(userEntity);
+
+        if (userEntity != null) {
+            return this.userMapper.mapUserEntityToDto(userEntity);            
+        } else {
+            throw new ServiceException("Not valid parameters for login");
+        }
     }
     
     public void uploadDocument(MultipartFile userId, MultipartFile document) throws IOException {
@@ -48,38 +53,52 @@ public class UserService {
         this.userRepository.uploadDocument(convertedUserId, document.getBytes());
     }
     
-    public int approveDocument(int userId, int adminId) {
+    public int approveDocument(int userId, int adminId) throws ServiceException {
         this.userRepository.approveDocument(userId);
         
         String userEmail = this.userRepository.getEmailByUserId(userId);
         String adminEmail = this.userRepository.getEmailByUserId(adminId);
         
-        this.emailService.sendEmail(userEmail, Constants.EMAIL_SUBJECT, Constants.STUDENT_EMAIL_TEXT);
-        this.emailService.sendEmail(adminEmail, Constants.EMAIL_SUBJECT, Constants.ADMIN_EMAIL_TEXT);
+        if (userEmail != null && adminEmail != null) {
+            this.emailService.sendEmail(userEmail, Constants.EMAIL_SUBJECT, Constants.STUDENT_EMAIL_TEXT);
+            this.emailService.sendEmail(adminEmail, Constants.EMAIL_SUBJECT, Constants.ADMIN_EMAIL_TEXT);            
+        } else {
+            throw new ServiceException("Couldn't find email for users with id: " + userId + ", " + adminId);
+        }
         
         return userId;
     }
     
-    public List<UserDto> getAllNotAdminUsers() {
+    public List<UserDto> getAllNotAdminUsers() throws ServiceException {
         List<UserEntity> entityList = this.userRepository.getAllNotAdminUsers();
         
-        List<UserDto> dtoList = new ArrayList<>();
-        for (UserEntity entity : entityList) {
-            UserDto dto = this.userMapper.mapUserEntityToDto(entity);
-            dtoList.add(dto);
+        if (!entityList.isEmpty()) {
+            List<UserDto> dtoList = new ArrayList<>();
+            for (UserEntity entity : entityList) {
+                UserDto dto = this.userMapper.mapUserEntityToDto(entity);
+                dtoList.add(dto);
+            }
+            
+            return dtoList;            
+        } else {
+            throw new ServiceException("Couldn't get any user from database");
         }
         
-        return dtoList;
     }
     
     public void deleteDocument(int userId) {
         this.userRepository.deleteDocument(userId);
     }
     
-    public UserDto getUserById(int userId) {
+    public UserDto getUserById(int userId) throws ServiceException {
         UserEntity userEntity = this.userRepository.getUserById(userId);
         
-        return this.userMapper.mapUserEntityToDto(userEntity);
+        if (userEntity != null) {
+            return this.userMapper.mapUserEntityToDto(userEntity);            
+        } else {
+            throw new ServiceException("Couldn't find user with id: " + userId);
+        }
+        
     }
     
     public void refuseDocument(int userId) {
