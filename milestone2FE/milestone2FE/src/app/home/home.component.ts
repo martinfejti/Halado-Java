@@ -21,10 +21,7 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router, private homeService: HomeService, private storeService: StoreService) { }
 
   ngOnInit() {
-
     this.userFromService = this.storeService.getUser();
-    console.log(this.userFromService);
-
     this.getAllNotAdminUsers();
   }
 
@@ -37,33 +34,26 @@ export class HomeComponent implements OnInit {
   }
 
   uploadDocument() {
-    console.log('upload doc');
     const file: File = this.fileToUpload;
-    console.log(file);
     const formData = new FormData();
     formData.append('document', file, file.name);
     formData.append('userId', new Blob([this.userFromService.id.toString()]), 'id');
-    console.log(formData);
     this.homeService.uploadDocument(this.userFromService.id, formData).subscribe(result => {
       console.log('result', result);
-      // this.getAllNotAdminUsers();
       alert('Dokumentum feltöltése sikeres volt.');
       this.storeService.getUserById(this.userFromService.id).subscribe(newResult => {
         console.log('new result: ', newResult);
         this.userFromService = newResult;
       }, error => {
         console.log(error);
-        console.log('Hiba történt az oldal újratöltése közben');
+        alert('Hiba történt az oldal újratöltése közben');
       });
     }, error => {
-      console.log('Dokumentum feltöltése sikertelen volt');
+      alert('Dokumentum feltöltése sikertelen volt');
     });
   }
 
   deleteDocument() {
-    console.log('delete doc');
-    console.log(this.userFromService.id);
-
     this.homeService.deleteDocument(this.userFromService.id).subscribe(result => {
       console.log('result: ', result);
       alert('Dokumentum törlése sikeres volt');
@@ -76,24 +66,16 @@ export class HomeComponent implements OnInit {
       });
     }, error => {
       console.log(error);
+      alert('Dokumentum törlése sikertelen volt');
     });
   }
 
   downloadFile(file: Blob) {
     const blob = new Blob([file], {type: 'text/csv'});
-    saveAs(blob, 'test.txt');
-    /*
-    const url = window.URL.createObjectURL(blob);
-
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'test.txt';
-    link.click();
-    */
+    saveAs(blob, 'downloaded_file.txt');
   }
 
   getAllNotAdminUsers() {
-    console.log('get all not admins');
     this.homeService.getAllNotAdminUsers().subscribe(result => {
       console.log('result', result);
       this.notAdminUsers = result;
@@ -103,9 +85,6 @@ export class HomeComponent implements OnInit {
   }
 
   approveDocument(studentId: number) {
-    console.log('approve doc');
-    console.log('stu id: ', studentId);
-    console.log('admin id: ', this.userFromService.id);
     this.homeService.approveDocument(studentId, this.userFromService.id).subscribe(result => {
       console.log('result:', result);
       alert('Jóváhagyás sikeres! Értesítés elküldve mindkét fél részére.');
@@ -117,8 +96,6 @@ export class HomeComponent implements OnInit {
   }
 
   refuseDocument(id: number) {
-    console.log('refuse doc');
-    console.log(id);
     this.homeService.refuseDocument(id).subscribe(result => {
       console.log('result: ', result);
       alert('Értesítés sikeresen elküldve');

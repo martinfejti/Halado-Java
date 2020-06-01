@@ -9,7 +9,6 @@ export class HomeService {
   constructor(private httpClient: HttpClient) {}
 
   uploadDocument(id: number, file: FormData) {
-    console.log('home service');
     const httpOptions = {
       headers: new HttpHeaders({
         Accept: 'application/json'
@@ -23,7 +22,6 @@ export class HomeService {
   }
 
   approveDocument(studentId: number, teacherId: number) {
-    console.log('home service');
     return this.httpClient.put('http://localhost:8080/approveDocument', {
       userId: studentId,
       adminId: teacherId
@@ -31,14 +29,12 @@ export class HomeService {
   }
 
   deleteDocument(id: number) {
-    console.log('home service');
     return this.httpClient.put('http://localhost:8080/deleteDocument', {
       userId: id
     });
   }
 
   refuseDocument(id: number) {
-    console.log('home service');
     return this.httpClient.post('http://localhost:8080/refuseDocument', {
       userId: id
     });
