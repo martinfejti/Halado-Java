@@ -2,91 +2,42 @@ package hu.haladojava.milestone2.repository;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import hu.haladojava.milestone2.entity.UserEntity;
 
 @Repository
 @Transactional
-public class UserRepository {
+public interface UserRepository extends JpaRepository <UserEntity, Integer> {
     
-    @PersistenceContext
-    private EntityManager entityManager;
+    @Query("SELECT u FROM User u WHERE u.username = :username AND u.password = :password")
+    public UserEntity getUserByUsernameAndPassword(@Param("username") String username, @Param("password") String password);
     
-    public UserRepository() {
-    }
+    @Modifying
+    @Query("UPDATE User u SET u.document = :file, u.documentIsApprovedByUser = TRUE WHERE u.id = :userId")
+    public void uploadDocument(@Param("userId") int userId, @Param("file") byte[] file);
     
-    public UserEntity createUserEntity(UserEntity userEntity) {
-        this.entityManager.persist(userEntity);
-        
-        return userEntity;
-    }
+    @Modifying
+    @Query("UPDATE User u SET u.documentIsApprovedByAdmin = TRUE WHERE u.id = :userId")
+    public void approveDocument(@Param("userId") int userId);
     
-    public UserEntity getUserByUsernameAndPassword(String username, String password) {
-        UserEntity result;
-        
-        TypedQuery<UserEntity> query = this.entityManager.createQuery("SELECT u FROM User u WHERE u.username = :username AND u.password = :password", UserEntity.class);
-        query.setParameter("password", password);
-        query.setParameter("username", username);
-        
-        result = query.getSingleResult();
-        
-        return result;
-    }
+    @Query("SELECT u.email FROM User u WHERE u.id = :userId")
+    public String getEmailByUserId(@Param("userId") int userId);
     
-    public void uploadDocument(int userId, byte[] file) {
-        Query query = this.entityManager.createQuery("UPDATE User u SET u.document = :file, u.documentIsApprovedByUser = TRUE WHERE u.id = :userId");
-        query.setParameter("userId", userId);
-        query.setParameter("file", file);
-        query.executeUpdate();
-    }
+    @Query("SELECT u FROM User u WHERE u.isAdmin = FALSE")
+    public List<UserEntity> getAllNotAdminUsers();
     
-    public int approveDocument(int userId) {
-        Query query = this.entityManager.createQuery("UPDATE User u SET u.documentIsApprovedByAdmin = TRUE WHERE u.id = :userId");
-        query.setParameter("userId", userId);
-        query.executeUpdate();
-        
-        return userId;
-    }
+    @Modifying
+    @Query("UPDATE User u SET u.document = NULL, u.documentIsApprovedByUser = FALSE, u.documentIsApprovedByAdmin = FALSE WHERE u.id = :userId")
+    public void deleteDocument(@Param("userId") int userId);
     
-    public String getUserEmailById(int userId) {
-        String result;
-        
-        TypedQuery<String> query = this.entityManager.createQuery("SELECT u.email FROM User u WHERE u.id = :userId", String.class);
-        query.setParameter("userId", userId);
-        result = query.getSingleResult();
-        
-        return result;
-    }
+    @Query("SELECT u FROM User u WHERE u.id = :userId")
+    public UserEntity getUserById(@Param("userId") int userId);
     
-    public List<UserEntity> getAllNotAdminUsers() {
-        List<UserEntity> userList = null;
-
-        TypedQuery<UserEntity> query = this.entityManager.createQuery("SELECT u FROM User u WHERE u.isAdmin = FALSE", UserEntity.class);
-        userList = query.getResultList();
-
-        return userList;
-    }
-    
-    public void deleteDocument(int userId) {
-        Query query = this.entityManager.createQuery("UPDATE User u SET u.document = NULL, u.documentIsApprovedByUser = FALSE, u.documentIsApprovedByAdmin = FALSE WHERE u.id = :userId");
-        query.setParameter("userId", userId);
-        query.executeUpdate();
-    }
-    
-    public UserEntity getUserById(int userId) {
-        UserEntity result;
-        
-        TypedQuery<UserEntity> query = this.entityManager.createQuery("SELECT u FROM User u WHERE u.id = :userId", UserEntity.class);
-        query.setParameter("userId", userId);
-        result = query.getSingleResult();
-        
-        return result;
-    }
 }

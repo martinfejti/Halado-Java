@@ -32,7 +32,7 @@ public class UserService {
     public UserDto createUserEntity(CreateUserDto createUserDto) {
         UserEntity userEntity = this.userMapper.mapCreateUserDtoToEntity(createUserDto);
         
-        this.userRepository.createUserEntity(userEntity);
+        this.userRepository.save(userEntity);
         
         return this.userMapper.mapUserEntityToDto(userEntity);
     }
@@ -52,8 +52,8 @@ public class UserService {
     public int approveDocument(int userId, int adminId) {
         this.userRepository.approveDocument(userId);
         
-        String userEmail = this.userRepository.getUserEmailById(userId);
-        String adminEmail = this.userRepository.getUserEmailById(adminId);
+        String userEmail = this.userRepository.getEmailByUserId(userId);
+        String adminEmail = this.userRepository.getEmailByUserId(adminId);
         
         this.emailService.sendEmail(userEmail, Constants.EMAIL_SUBJECT, Constants.STUDENT_EMAIL_TEXT);
         this.emailService.sendEmail(adminEmail, Constants.EMAIL_SUBJECT, Constants.ADMIN_EMAIL_TEXT);
@@ -84,7 +84,7 @@ public class UserService {
     }
     
     public void refuseDocument(int userId) {
-        String userEmail = this.userRepository.getUserEmailById(userId);
+        String userEmail = this.userRepository.getEmailByUserId(userId);
         
         this.emailService.sendEmail(userEmail, Constants.NEGATIVE_EMAIL_SUBJECT, Constants.NEGATIVE_EMAIL_TEXT);
     }
